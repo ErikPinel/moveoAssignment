@@ -9,7 +9,8 @@
   .codeSection{
     width: 65vw;
     height: 100vh;
-    background-color: red;
+    background-color: #213547;
+    position: relative;
   }
 .descriptionSection{
     width: 35vw;
@@ -32,10 +33,26 @@
   cursor: pointer;
 }
 
+#smileyWrapper{
+  position: absolute;
+  z-index: 20;
+  width: 100vw;
+  height: 100vh;
+}
 
+#smileyImg{
+  width: 100vw;
+  height:100vh;
+}
 
+#backToLessonIconWrapper{
+  position: absolute;
+  z-index: 100;
+  top: 5vh;
+  left: 2.5vw;
+  color: black;
 
-
+}
 
 
 /*  */
@@ -67,4 +84,29 @@
 .CodeMirror{
   min-height: 95vh;
   padding-top: 5vh;
+  
+}
+
+.icon{
+  cursor: pointer;
+
+}
+
+#saveToDbIcon{
+  position: absolute;
+  right: 2vw;
+  top: 2.5vh;
+
+  color: #2c3e50;
+  z-index: 15;
+  background-color: #d1d5da;
+  padding: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+
+#saveToDbIcon:hover{
+  background-color: goldenrod;
+  color: #ffff;
 }

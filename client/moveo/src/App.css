@@ -14,7 +14,7 @@
 
 .codeBlockItem {
   background-color:white;
-  width: 20vw;
+  width: 15vw;
   height: 15vh;
   color: grey;
   margin: 5vw;
@@ -34,7 +34,10 @@ display: flex;
 flex-direction: row;
 }
 
-h1{
-  margin-left: 25%;
+#mainPageContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: gold;
+
 }

@@ -143,7 +143,7 @@ mongoose
     autoIndex: true,
   })
   .then(() => {
-    server.listen('https://moveo-assignment-1yt2c61al-erikpinel.vercel.app/', () => {
+    server.listen('https://moveo-assignment-sand.vercel.app/', () => {
       console.log("SERVER IS RUNNING");
     });
   });

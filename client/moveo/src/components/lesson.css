@@ -1,0 +1,70 @@
+.LessonContainer{
+    background-color: #2c3e50;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .codeSection{
+    width: 65vw;
+    height: 100vh;
+    background-color: red;
+  }
+.descriptionSection{
+    width: 35vw;
+    height: 100vh;
+    background-color: #d1d5da;
+    overflow-y: scroll;
+    color: #2c3e50;
+    padding: 15px;
+
+}
+  
+#solution{
+  overflow-x: none;
+  position: relative;
+}
+
+.iconSolution{
+  position: absolute;
+  right: 1vw;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+/*  */
+
+.field {
+    width: calc(100% - 20px);
+    max-width: 75vw;
+    margin-inline: auto;
+  }
+  .textarea-box {
+    width: 98%;
+    margin-top: 15px;
+  }
+  
+  
+  textarea {
+    width: inherit;
+    min-height: 90vh;
+    border-radius: 5px;
+    background: #ddd;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: inherit;
+    resize: vertical;
+  }
+  
+
+.CodeMirror{
+  min-height: 95vh;
+  padding-top: 5vh;
+}

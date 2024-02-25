@@ -16,7 +16,7 @@ import axios from "axios";
 let isSocketIni = false;
 var initialCodeValueDb=''
 const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
-  const [socket, setSocket] = useState(io.connect("http://localhost:3001"));
+  const [socket, setSocket] = useState(io.connect("https://lazy-pink-fawn-hose.cyclic.app"));
   const [message, setMessage] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [showSolution, setShowSolution] = useState(false);
@@ -69,7 +69,7 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
 
   function getCurrentCodeDb(lessonName) {
     axios
-      .get(`http://localhost:3001/api/v1/lastSavedCode/${lessonName}/`)
+      .get(`https://lazy-pink-fawn-hose.cyclic.app/api/v1/lastSavedCode/${lessonName}/`)
       .then((response) => {
         editorRef.current.setValue(response.data);
       });
@@ -80,7 +80,7 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
     const lessonName=title;
     const code =editorRef?.current?.getValue();
     axios
-      .patch(`http://localhost:3001/api/v1/saveCode/`,{lessonName,code})
+      .patch(`https://lazy-pink-fawn-hose.cyclic.app/api/v1/saveCode/`,{lessonName,code})
       .then((response) => {
         console.log(response?.msg)
       });
@@ -107,7 +107,8 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
     socket.on("room_size", (data, id) => {
       console.log(data + "data size");
       if( (!editorRef?.current?.getValue())&&data==1){
-        initialCodeValueDb=getCurrentCodeDb(title)
+       try{ initialCodeValueDb=getCurrentCodeDb(title)
+       }catch(err){console.log("err")}
       }
       if (!isEditEnabled) {
         if (data > 1) {

@@ -16,13 +16,10 @@ import axios from "axios";
 let isSocketIni = false;
 var initialCodeValueDb=''
 const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
-  const [socket, setSocket] = useState(io.connect("https://lazy-pink-fawn-hose.cyclic.app"));
-  const [message, setMessage] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  const [socket, setSocket] = useState(io.connect("https://starter-express-api-5puy.onrender.com/"));
   const [showSolution, setShowSolution] = useState(false);
   const [showSmiley, setShowSmiley] = useState(false);
   const [isSmileyShown, setIsSmileyShown] = useState(false);
-  const [messageReceived, setMessageReceived] = useState("");
   const [isEditEnabled, setIsEditEnabled] = useState(false);
 
   const editorRef = useRef(null);
@@ -51,7 +48,6 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
     editorRef.current.on("change", (instance, changes) => {
       const { origin } = changes;
       const data = instance.getValue();
-      console.log("current:editor:---" + editorRef.current.getValue());
       if (data.trim() == codeSolution.trim() && !isSmileyShownRef.current) {
         setShowSmiley(true);
         setIsSmileyShown(!isSmileyShown);
@@ -67,9 +63,10 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
     });
   }
 
+
   function getCurrentCodeDb(lessonName) {
     axios
-      .get(`https://lazy-pink-fawn-hose.cyclic.app/api/v1/lastSavedCode/${lessonName}/`)
+      .get(`https://starter-express-api-5puy.onrender.com/api/v1/lastSavedCode/${lessonName}/`)
       .then((response) => {
         editorRef.current.setValue(response.data);
       });
@@ -80,9 +77,9 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
     const lessonName=title;
     const code =editorRef?.current?.getValue();
     axios
-      .patch(`https://lazy-pink-fawn-hose.cyclic.app/api/v1/saveCode/`,{lessonName,code})
+      .patch(`https://starter-express-api-5puy.onrender.com/api/v1/saveCode/`,{lessonName,code})
       .then((response) => {
-        console.log(response?.msg)
+        console.log(response)
       });
   }
 
@@ -92,20 +89,17 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
   });
 
   socket.on("joined", ({ socketId }) => {
-    console.log("joinedddddd!!!!!!!!!");
-    // if (username !== location.state?.username) {
-    //     toast.success(`${username} joined the room.`);
-    //     console.log(`${username} joined`);
-    // };
     socket.emit("sync_code", {
       data: editorRef?.current?.getValue(),
       socketId,
     });
   });
+  useEffect(()=>{
+    init();
+  },[])
 
   useEffect(() => {
     socket.on("room_size", (data, id) => {
-      console.log(data + "data size");
       if( (!editorRef?.current?.getValue())&&data==1){
        try{ initialCodeValueDb=getCurrentCodeDb(title)
        }catch(err){console.log("err")}
@@ -116,14 +110,9 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
           isEditEnabledRef.current = true;
         }
 
-        console.log(isEditEnabledRef.current + "isEditEnabaled???");
       }
       if (id == socket.id) init();
     });
-  }, [socket]);
-
-  useEffect(() => {
-    console.log("recived");
 
     if (socket) {
       socket.on("receive_message", (data) => {
@@ -137,9 +126,9 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
 
     return () => {
       socket.disconnect();
-      console.log("disconnect toom");
     };
   }, [socket]);
+
 
   return (
     <div className="LessonContainer">
@@ -151,7 +140,7 @@ const Lesson = ({ title, codeDescription, codeSolution, setCurentLesson }) => {
           >
             <ArrowBackIcon className="icon" fontSize="large" />
           </div>
-          <img id="smileyImg" src="../../public/smiley.jpg" />
+          <img id="smileyImg" src="https://www.pikpng.com/pngl/m/19-191298_smiley-face-emoji-text-smiley-clipart.png" />
         </div>
       )}
 

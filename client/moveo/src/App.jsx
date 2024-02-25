@@ -110,25 +110,13 @@ const codeBlocks = [
 
 
 
-let room;
 
 function App() {
-  //Room State
-  // const [room, setRoom] = useState("");
-
-  // Messages States
 
 
   const [currentLesson, setCurentLesson] = useState("");
 
 
-
-
-
-
-  useEffect(()=>{
-    console.log("first render!!!!")
-  },[])
 
   return (
     <div className="App">

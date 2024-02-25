@@ -143,7 +143,7 @@ mongoose
     autoIndex: true,
   })
   .then(() => {
-    server.listen('https://moveo-assignment-sand.vercel.app/', () => {
+    server.listen(process.env.PORT () => {
       console.log("SERVER IS RUNNING");
     });
   });
